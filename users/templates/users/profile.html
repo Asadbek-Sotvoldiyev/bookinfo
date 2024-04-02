@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+      {% if user.image %}
+      	<img src="{{ user.image.url }}" alt="John" style="width:300px; height: 300px; border-radius: 50%">
+      {% else %}
+          <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="John" style="width:300px; height: 300px; border-radius: 50%">
+      {% endif %}
+      <div class="profile">
+          <h1>{{ user.username }}</h1>
+          <p class="title">Ismi: {{ user.first_name }}</p>
+          <p class="title">Familiyasi: {{ user.last_name }}</p>
+          <p class="title">Email: {{ user.email }}</p>
+          <p>Qo'shilgan: {{ user.date_joined|date }}</p>
+          <p>
+              <a href="{% url 'users:edit_profile' %}" class="btn-edit">Tahrirlash</a>
+              <a href="{% url 'users:logout' %}" class="btn-edit">Logout</a>
+          </p>
+      </div>
+    </div>
+{% endblock %}

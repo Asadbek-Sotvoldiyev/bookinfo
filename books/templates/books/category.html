@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<section class="">
+            {% for book in books %}
+            	<div class="post">
+            <!-- post-inner -->
+            <div class="post-inner">
+              <header>
+                <h2><a href="#">{{ book.name }}</a></h2>
+                <p class="tags"><a href="#">{{ book.category.name }}</a> <a href="#">{{ book.genre.name }}</a> </p>
+                <div class="cl">&nbsp;</div>
+              </header>
+              <div class="img-holder"> <a href="#"><img src="{{ book.image.url }}" alt="" width="100%"></a> <a href="{{ book.image.url }}" class="btn-full-image popup"><span>FULL IMAGE</span></a> </div>
+              <!-- meta -->
+              <div class="meta">
+                <p class="date">{{ book.year }} by <a>{{ book.author }}</a></p>
+                <div class="right">
+                  <div class="rating-holder">
+                    <p>REYTING</p>&nbsp;
+                    {% for key,value in ratings.items %}
+                        	{% if key == book.id %}
+                        		    {% for foo in ""|ljust:value %}
+                                           <i class="fa-solid fa-star"></i>
+                                    {% endfor %}
+                        	{% endif %}
+                        {% endfor %}
+                        {% for key,value in regular_ratings.items %}
+                        	{% if key == book.id %}
+                        		    {% for foo in ""|ljust:value %}
+                                           <i class="fa-regular fa-star"></i>
+                                    {% endfor %}
+                        	{% endif %}
+                        {% endfor %}
+                  </div>
+                  <a href="{% url 'books:detail' book.id %}" class="comments">{{ book.comments.count }} ta izoh</a> </div>
+                <div class="cl">&nbsp;</div>
+              </div>
+              <!-- end of meta -->
+              <!-- post-cnt -->
+              <div class="post-cnt">
+                <p>{{ book.about|truncatewords:60|linebreaks }}</p>
+                <a href="{% url 'books:detail' book.id %}" class="more">Batafsil o'qish</a> </div>
+              <!-- end of post-cnt -->
+            </div>
+            <!-- post-inner -->
+          </div>
+            {% endfor %}
+
+        </section>
+
+        <div class="modal" id="myModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Ro'yxatdan o'tish</h2>
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        {{ forms }}
+        <span>Allaqachon hisobingiz bormi? <span id="login" class="signup">Kirish</span></span>
+      <button type="submit">Ro'yxatdan o'tish</button>
+    </form>
+  </div>
+</div>
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Kirish</h2>
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <span>Akkountingiz yo'qmi? <span id="myBtn" class="signup">Ro'yxatdan o'tish</span></span>
+        <button type="submit">Kirish</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// Modalni ochish va yopish
+var registerModal = document.getElementById("myModal");
+var registerBtn = document.getElementById("myBtn");
+var registerClose = registerModal.getElementsByClassName("close")[0];
+
+registerBtn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    registerModal.style.display = "block";
+    loginModal.style.display = "none";
+})
+
+
+registerClose.addEventListener('click', (e)=>{
+    e.preventDefault()
+    registerModal.style.display = "none";
+})
+
+var loginModal = document.getElementById("loginModal");
+var loginBtn = document.getElementById("loginBtn");
+var loginClose = loginModal.getElementsByClassName("close")[0];
+
+loginBtn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    loginModal.style.display = "block";
+    registerModal.style.display = "none";
+})
+
+loginClose.addEventListener('click', (e)=>{
+    e.preventDefault()
+    loginModal.style.display = "none";
+})
+
+var login = document.getElementById("login");
+
+login.addEventListener('click', (e)=>{
+    e.preventDefault()
+    loginModal.style.display = "block";
+    registerModal.style.display = "none";
+})
+
+
+</script>
+{% endblock %}

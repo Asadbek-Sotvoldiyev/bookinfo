@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="card">
+        {% if user.image %}
+      	<img src="{{ user.image.url }}" alt="John" style="width:300px; height: 300px; border-radius: 50%">
+      {% else %}
+          <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="John" style="width:300px; height: 300px; border-radius: 50%">
+      {% endif %}
+      <div class="profile">
+          <form action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                {{ form }}
+              <a id="reset_password">Parolni yangilash</a>
+            <button type="submit">Saqlash</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="reset">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Parolni yangilash</h2>
+        <form action="#" method="POST">
+            {% csrf_token %}
+            {{ forms }}
+            <button type="submit">Tasdiqlash</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+        var loginModal = document.getElementById("reset");
+        var loginBtn = document.getElementById("reset_password");
+        var loginClose = loginModal.getElementsByClassName("close")[0];
+
+        loginBtn.addEventListener('click', (e)=>{
+            e.preventDefault()
+            loginModal.style.display = "block";
+            registerModal.style.display = "none";
+        })
+
+        loginClose.addEventListener('click', (e)=>{
+            e.preventDefault()
+            loginModal.style.display = "none";
+        })
+
+        var login = document.getElementById("reset_password");
+
+        login.addEventListener('click', (e)=>{
+            e.preventDefault()
+            loginModal.style.display = "block";
+            registerModal.style.display = "none";
+        })
+    </script>
+{% endblock %}
+

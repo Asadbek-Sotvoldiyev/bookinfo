@@ -1,0 +1,23 @@
+{% load static %}
+<div class="header">
+        <div class="logo">
+            <img width="50px" src="{% static 'mybook/css/images/logo.png' %}" alt="">
+            <span>Bookinfo.uz</span>
+        </div>
+        <!-- navigation -->
+        <nav id="navigation">
+          <ul>
+            <li><a href="{% url 'index' %}"><i class="fa-solid fa-house"></i> Bosh sahifa</a></li>
+           <li><a href="{% url 'books:books' %}"><i class="fa-solid fa-book"></i> Kitoblar</a></li>
+            <li><a href="{% url 'books:about' %}"><i class="fa-solid fa-address-card"></i> Biz haqimizda</a></li>
+            {% if user.is_authenticated %}
+            	<li><a href="{% url 'users:profile' %}"><i class="fa-solid fa-user"></i> {{ user.username }}</a>
+                </li>
+            {% else %}
+                <li><a href="#" id="loginBtn"><i class="fa-solid fa-user"></i> KIRISH</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        <!-- end of navigation -->
+        <div class="cl">&nbsp;</div>
+      </div>
