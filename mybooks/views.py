@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 
 def index(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by("name")
     p = Paginator(books, 2)
     page = request.GET.get('page')
     book_page = p.get_page(page)
