@@ -68,7 +68,11 @@
                   <form action="{% url 'books:add_comment' book.id %}" method="POST" class="commentform">
                   {% csrf_token %}
                   {{ form_comment }}
-                  <button type="submit">Qoldirish</button>
+                  {% if user.is_authenticated %}
+                  	<button type="submit">Qoldirish</button>
+                  {% else %}
+                      <a href="{% url 'index' %}"><button class="commentbtn" type="button">Qoldirish</button></a>
+                  {% endif %}
               </form>
               </div>
           </div>

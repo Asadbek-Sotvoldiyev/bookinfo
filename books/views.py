@@ -36,7 +36,7 @@ class CategoryView(View):
 class BookDetail(View):
 
     def get(self,request,pk):
-        comments = Comment.objects.filter(book_id=pk)
+        comments = Comment.objects.filter(book_id=pk).order_by("-id")
         books = Book.objects.all()
         book = Book.objects.get(id=pk)
         form = CommentForm()
@@ -68,7 +68,7 @@ class BookDetail(View):
         }
         return render(request, 'books/detail.html', context=data)
 
-class AddCommentView(LoginRequiredMixin,View):
+class AddCommentView(View):
     def post(self,request,pk):
         form = CommentForm(request.POST)
         book = Book.objects.get(id=pk)

@@ -356,7 +356,7 @@ a#myBtn:hover {
     border-radius: 10px;
 }
 
-.btn-edit{
+.btn-editm{
     padding: 5px;
     font-family: Verdana;
     background-color: #4caf50;
@@ -366,13 +366,27 @@ a#myBtn:hover {
     text-decoration: none;
     border-radius: 5px;
 }
-.btn-edit:hover{
+.btn-edit:hover, .commentbtn{
     background-color: #0acc00;
     text-decoration: none;
 }
 
 #logout{
     padding: 10px;
+}
+
+.commentbtn{
+    padding: 5px;
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #4caf50;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+
 }
 
 
